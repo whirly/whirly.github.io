@@ -1721,7 +1721,7 @@ section .overlay-text {
   right: -100px;
 }
 #testimonials .carousel .carousel-indicators {
-  bottom: 0;
+  bottom: 0px;
 }
 #testimonials .carousel .carousel-indicators li,
 #testimonials .carousel .carousel-indicators .active {
@@ -1732,7 +1732,7 @@ section .overlay-text {
 #testimonials .carousel blockquote {
   margin: 0;
   padding: 0;
-  min-height: 250px;
+  min-height: 300px;
 }
 #testimonials .carousel blockquote img {
   width: 100px;
