@@ -2431,6 +2431,11 @@ footer.footer .icon {
     font-size: 1.7em;
     margin-bottom: 0.7em;
   }
+
+  #testimonials .carousel blockquote {
+    min-height: 400px;
+  }
+
 }
 @media (max-width: 991px) and (min-width: 768px) {
   #pricing .plan {
@@ -2444,6 +2449,10 @@ footer.footer .icon {
   #pricing .plan.featured .plan-title {
     margin: 0;
     padding-top: 0;
+  }
+
+  #testimonials .carousel blockquote {
+    min-height: 400px;
   }
 }
 @media (max-width: 767px) {
