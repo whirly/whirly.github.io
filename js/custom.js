@@ -67,7 +67,8 @@ function owlCarousel() {
     $("#owl-example").owlCarousel({
       lazyLoad : true,
       items: 3,
-      theme: "owl-theme-main"
+      theme: "owl-theme-main",
+      autoPlay: true
     }); 
   
     $("#intro").owlCarousel({
