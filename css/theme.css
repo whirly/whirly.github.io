@@ -117,6 +117,11 @@ blockquote {
 .colour-white {
   color: white !important;
 }
+
+.colour-black {
+  color: black !important;
+}
+
 .highlight {
   color: #88b7b3;
 }
@@ -1220,7 +1225,7 @@ section .login-overlay {
   font-size: 1.3em;
   font-weight: 400;
   line-height: 1.8;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(0, 0, 0, 0.9);
   margin: 1em 10em;
 }
 #intro .carousel-caption-center .btn,
