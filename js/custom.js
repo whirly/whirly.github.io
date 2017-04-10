@@ -413,70 +413,67 @@ $(function() {
   Jquery Validation using jqBootstrapValidation
    example is taken from jqBootstrapValidation docs 
   */
-$(function() {
+$(function () {
 
- $("input,textarea").jqBootstrapValidation(
-    {
-     preventSubmit: true,
-     submitError: function($form, event, errors) {
-      // something to have when submit produces an error ?
-      // Not decided if I need it yet
-     },
-     submitSuccess: function($form, event) {
-      event.preventDefault(); // prevent default submit behaviour
-       // get values from FORM
-       var first_name = $("input#first_name").val();  
-       var last_name = $("input#last_name").val();  
-       var email = $("input#email").val(); 
-       var message = $("textarea#message").val();
-    //     var firstName = name; // For Success/Failure Message
-    //        // Check for white space in name for Success/Fail message
-    //     if (firstName.indexOf(' ') >= 0) {
-	   // firstName = name.split(' ').slice(0, -1).join(' ');
-    //      }        
-	 $.ajax({
-                url: "http://mailer.methodinthemadness.eu/send",
-            	type: "POST",
-            	data: {first_name: first_name, last_name: last_name, email: email, message: message},
-            	cache: false,
-            	success: function() {  
-            	// Success message
-            	   $('#success').html("<div class='alert alert-success'>");
-            	   $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-            		.append( "</button>");
-            	  $('#success > .alert-success')
-            		.append("<strong>Votre message a bien été envoyé </strong>");
- 		  $('#success > .alert-success')
- 			.append('</div>');
- 						    
- 		  //clear all fields
- 		  $('#contactForm').trigger("reset");
- 	      },
- 	   error: function() {		
- 		// Fail message
- 		 $('#success').html("<div class='alert alert-danger'>");
-            	$('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-            	 .append( "</button>");
-            	$('#success > .alert-danger').append("<strong>Désolé "+first_name+" il semble que notre serveur mail ne réponds pas...</strong> Pouvez vous écrire directement à contact, methodinthemadness.eu Désolé pour le dérangement !");
- 	        $('#success > .alert-danger').append('</div>');
- 		//clear all fields
- 		$('#contactForm').trigger("reset");
- 	    },
-           })
-         },
-         filter: function() {
-                   return $(this).is(":visible");
-         },
-       });
+    $("input,textarea").jqBootstrapValidation(
+        {
+            preventSubmit: true,
+            submitError: function ($form, event, errors) {
+                // something to have when submit produces an error ?
+                // Not decided if I need it yet
+            },
+            submitSuccess: function ($form, event) {
+                event.preventDefault(); // prevent default submit behaviour
+                // get values from FORM
+                var firstName = $("input#first_name").val();
+                var lastName = $("input#last_name").val();
+                var email = $("input#email").val();
+                var message = $("textarea#message").val();
 
-      $("a[data-toggle=\"tab\"]").click(function(e) {
-                    e.preventDefault();
-                    $(this).tab("show");
+                $.ajax({
+                    url: "https://mitmwebsite.azurewebsites.net/api/SendContactRequest",
+                    type: "POST",
+                    data: JSON.stringify({ firstName: firstName, lastName: lastName, email: email, message: message }),
+                    contentType: 'application/json; charset=utf-8',
+                    cache: false,
+                    success: function () {
+                        // Success message
+                        $('#success').html("<div class='alert alert-success'>");
+                        $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+                            .append("</button>");
+                        $('#success > .alert-success')
+                            .append("<strong>Votre message a bien été envoyé </strong>");
+                        $('#success > .alert-success')
+                            .append('</div>');
+
+                        //clear all fields
+                        $('#contactForm').trigger("reset");
+                    },
+                    error: function () {
+                        // Fail message
+                        $('#success').html("<div class='alert alert-danger'>");
+                        $('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+                            .append("</button>");
+                        $('#success > .alert-danger').append("<strong>Désolé " + firstName + ", il semble que notre serveur mail ne répond pas...</strong> Vous pouvez écrire directement à contact at methodinthemadness.eu. Désolé pour le désagrément !");
+                        $('#success > .alert-danger').append('</div>');
+                        //clear all fields
+                        $('#contactForm').trigger("reset");
+                    }
+                })
+            },
+            filter: function () {
+                return $(this).is(":visible");
+            },
         });
-  });
- 
 
-/*When clicking on Full hide fail/success boxes */ 
-$('#name').focus(function() {
-     $('#success').html('');
-  });
+    $("a[data-toggle=\"tab\"]").click(function (e) {
+        e.preventDefault();
+        $(this).tab("show");
+    });
+});
+
+
+/*When clicking on Full hide fail/success boxes */
+$('#name').focus(function () {
+    $('#success').html('');
+});
